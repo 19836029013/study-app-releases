@@ -3408,10 +3408,8 @@ function stopReadTimer() {
 /** 首页那一条"最近阅读 / 继续读" */
 function recentRow() {
   const list = (state.recent || []).filter((r) => DOCS[r.docId]);
-  if (!list.length) {
-    return `<div class="recentWrap"><div class="recentHd">最近阅读</div>
-      <div class="recentEmpty">读满 ${READ_MIN_SEC / 60} 分钟的内容才会出现在这里 —— 免得刚点开划两下也占地方。</div></div>`;
-  }
+  // 没有最近阅读时整块不渲染：不必用一行小字去解释它为什么不出现
+  if (!list.length) return '';
   return `<div class="recentWrap">
     <div class="recentHd">最近阅读 <span>读满 ${READ_MIN_SEC / 60} 分钟</span></div>
     <div class="recentRow">
