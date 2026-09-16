@@ -1,0 +1,16 @@
+{
+  "name": "学习 App · 总导师/助教/AI 问答",
+  "short_name": "学习 App",
+  "description": "计算机一级 + GAMES101 的学习台：课程、阅读器、待办、复习提醒，以及 A/B/C 三级 AI。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#111214",
+  "lang": "zh-CN",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}
