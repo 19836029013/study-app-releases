@@ -1,7 +1,7 @@
 {
-  "version": "1.0.13",
-  "notes": "设置里版本行：手机 App 只显示 手机版 vX.Y.Z（去掉",
-  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.13.apk",
-  "size": 140785,
+  "version": "1.0.14",
+  "notes": "更新检查同时问 GitHub 和 CDN 两个源，取版本号更新的那个（解决 CDN 缓存导致显示旧版本）",
+  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.14.apk",
+  "size": 141113,
   "date": "2026-09-16"
 }
