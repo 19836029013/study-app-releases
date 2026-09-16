@@ -1,7 +1,7 @@
 {
-    "version":  "1.0.17",
-    "notes":  "修复应用内更新：改为应用内下载，下完自动弹出安装界面（原来只会跳到浏览器，还得自己去通知栏找文件手动安装）",
-    "apk":  "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.17.apk",
-    "size":  143045,
+    "version":  "1.0.18",
+    "notes":  "应用内更新改好了：点更新直接在 App 内下载，下完自动弹出安装界面；并新增更新源（GitHub Pages），国内不用梯子也能检测到新版",
+    "apk":  "https://19836029013.github.io/study-app-releases/study-app-1.0.18.apk",
+    "size":  143065,
     "date":  "2026-09-16"
 }
