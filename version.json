@@ -1,7 +1,7 @@
 {
-  "version": "1.0.12",
-  "notes": "修手机端整页滚动导致底部导航栏滑到最底部（现在只滚内容区）",
-  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.12.apk",
-  "size": 140709,
+  "version": "1.0.13",
+  "notes": "设置里版本行：手机 App 只显示 手机版 vX.Y.Z（去掉",
+  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.13.apk",
+  "size": 140785,
   "date": "2026-09-16"
 }
