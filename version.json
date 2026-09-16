@@ -1,7 +1,8 @@
 {
-    "version":  "1.0.18",
-    "notes":  "应用内更新改好了：点更新直接在 App 内下载，下完自动弹出安装界面；并新增更新源（GitHub Pages），国内不用梯子也能检测到新版",
-    "apk":  "https://19836029013.github.io/study-app-releases/study-app-1.0.18.apk",
-    "size":  143065,
+    "version":  "1.0.19",
+    "notes":  "更新改成 App 内下载：实时进度条、多源自动切换、SHA-256 校验、下完自动弹安装（和 DSH Remote 一致的体验）",
+    "apk":  "https://19836029013.github.io/study-app-releases/study-app-1.0.19.apk",
+    "size":  145721,
+    "sha256":  "e7bddc9fe990007eea8eb56abc737384b07f7282115f2c3807516588ef868ce3",
     "date":  "2026-09-16"
 }
