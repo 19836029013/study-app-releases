@@ -1,8 +1,8 @@
 {
-    "version":  "1.0.20",
-    "notes":  "设置里去掉\"强制刷新界面（清缓存）\"——那是网页版 PWA 才需要的功能，App 里没用",
-    "apk":  "https://19836029013.github.io/study-app-releases/study-app-1.0.20.apk",
-    "size":  145673,
-    "sha256":  "64d8c7fa15a550737086acdb25882108a70ce5a482c25b52a55cac32010e7ce6",
+    "version":  "1.0.21",
+    "notes":  "配置不再丢：模型/API Key/进度会额外备份到「文档/学习App」，卸载重装后自动恢复；去掉 App 里多余的清缓存按钮",
+    "apk":  "https://19836029013.github.io/study-app-releases/study-app-1.0.21.apk",
+    "size":  147505,
+    "sha256":  "136fffae44806a194c04d1c302b9902458496520d1c42719d45dc60499981bcc",
     "date":  "2026-09-16"
 }
