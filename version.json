@@ -1,7 +1,7 @@
 {
-  "version": "1.0.6",
-  "notes": "模型与推理强度都能分 A/B/C 单独设置（推理强度按 reasoning_effort 传）；设置页改成整屏；删掉连电脑后端那套选项",
-  "apk": "https://github.com/19836029013/study-app-releases/raw/main/study-app-1.0.6.apk",
-  "size": 140825,
+  "version": "1.0.7",
+  "notes": "浏览器里点检查更新会明确提示；手机 App 内可下载安装（请先手动装一次 1.0.7，之后就能自动更新了）",
+  "apk": "https://github.com/19836029013/study-app-releases/raw/main/study-app-1.0.7.apk",
+  "size": 140925,
   "date": "2026-09-16"
 }
