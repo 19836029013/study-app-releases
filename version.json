@@ -1,7 +1,7 @@
 {
-  "version": "1.0.14",
-  "notes": "更新检查同时问 GitHub 和 CDN 两个源，取版本号更新的那个（解决 CDN 缓存导致显示旧版本）",
-  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.14.apk",
-  "size": 141113,
+  "version": "1.0.15",
+  "notes": "修：从侧边栏打开设置时先把侧边栏收起（之前它盖住设置）；设置高度 86% 上方留白",
+  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.15.apk",
+  "size": 141197,
   "date": "2026-09-16"
 }
