@@ -1,7 +1,7 @@
 {
-  "version": "1.0.1",
-  "notes": "第一个正式版：界面与资料离线可用、AI 手机直连 DeepSeek、设置里可调 A/B/C 各自的模型与思考等级",
-  "apk": "https://github.com/19836029013/study-app-releases/raw/main/study-app-1.0.1.apk",
-  "size": 139469,
+  "version": "1.0.5",
+  "notes": "模型列表从你的 API 实时获取；去掉推理强度说明；删掉连电脑后端选项",
+  "apk": "https://github.com/19836029013/study-app-releases/raw/main/study-app-1.0.5.apk",
+  "size": 140125,
   "date": "2026-09-16"
 }
