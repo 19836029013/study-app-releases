@@ -1,7 +1,7 @@
 {
-  "version": "1.0.8",
-  "notes": "下载改走 CDN + 系统浏览器；版本行在 App 里显示真实版本",
-  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.8.apk",
-  "size": 140265,
+  "version": "1.0.9",
+  "notes": "修掉版本号不更新的 bug（之前打包时版本号被旧文件覆盖，导致装完还一直提示有新版）",
+  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.9.apk",
+  "size": 140261,
   "date": "2026-09-16"
 }
