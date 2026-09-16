@@ -1,7 +1,7 @@
 {
-  "version": "1.0.11",
-  "notes": "修：CDN 缓存导致读到旧版本号；版本比较改成只有更新才提示",
-  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.11.apk",
-  "size": 140609,
+  "version": "1.0.12",
+  "notes": "修手机端整页滚动导致底部导航栏滑到最底部（现在只滚内容区）",
+  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.12.apk",
+  "size": 140709,
   "date": "2026-09-16"
 }
