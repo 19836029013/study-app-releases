@@ -1,7 +1,7 @@
 {
-  "version": "1.0.15",
-  "notes": "修：从侧边栏打开设置时先把侧边栏收起（之前它盖住设置）；设置高度 86% 上方留白",
-  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.15.apk",
-  "size": 141197,
+  "version": "1.0.16",
+  "notes": "模型/推理强度改一下就自动保存（不必再点保存按钮），更新后配置不丢",
+  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.16.apk",
+  "size": 141417,
   "date": "2026-09-16"
 }
