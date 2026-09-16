@@ -1,7 +1,7 @@
 {
-  "version": "1.0.9",
-  "notes": "修掉版本号不更新的 bug（之前打包时版本号被旧文件覆盖，导致装完还一直提示有新版）",
-  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.9.apk",
-  "size": 140261,
+  "version": "1.0.10",
+  "notes": "设置页的版本号不再写死（之前显示 1.0.0，其实是新版）",
+  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.10.apk",
+  "size": 140265,
   "date": "2026-09-16"
 }
