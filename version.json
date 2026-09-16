@@ -1,7 +1,7 @@
 {
-  "version": "1.0.10",
-  "notes": "设置页的版本号不再写死（之前显示 1.0.0，其实是新版）",
-  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.10.apk",
-  "size": 140265,
+  "version": "1.0.11",
+  "notes": "修：CDN 缓存导致读到旧版本号；版本比较改成只有更新才提示",
+  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.11.apk",
+  "size": 140609,
   "date": "2026-09-16"
 }
