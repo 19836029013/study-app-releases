@@ -1,7 +1,7 @@
 {
-  "version": "1.0.16",
-  "notes": "模型/推理强度改一下就自动保存（不必再点保存按钮），更新后配置不丢",
-  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.16.apk",
-  "size": 141417,
-  "date": "2026-09-16"
+    "version":  "1.0.17",
+    "notes":  "修复应用内更新：改为应用内下载，下完自动弹出安装界面（原来只会跳到浏览器，还得自己去通知栏找文件手动安装）",
+    "apk":  "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.17.apk",
+    "size":  143045,
+    "date":  "2026-09-16"
 }
