@@ -1,7 +1,7 @@
 {
-  "version": "1.0.7",
-  "notes": "浏览器里点检查更新会明确提示；手机 App 内可下载安装（请先手动装一次 1.0.7，之后就能自动更新了）",
-  "apk": "https://github.com/19836029013/study-app-releases/raw/main/study-app-1.0.7.apk",
-  "size": 140925,
+  "version": "1.0.8",
+  "notes": "下载改走 CDN + 系统浏览器；版本行在 App 里显示真实版本",
+  "apk": "https://cdn.jsdelivr.net/gh/19836029013/study-app-releases@main/study-app-1.0.8.apk",
+  "size": 140265,
   "date": "2026-09-16"
 }
