@@ -3657,6 +3657,11 @@ if (location.protocol.startsWith('http') && 'serviceWorker' in navigator) {
       var st = (sh.querySelector('.st') || {}).textContent || '';
       if (st.indexOf('设置') >= 0) { sh.style.height = '96%'; sh.style.maxHeight = '96%'; }
     });
+    // 值已被删空的"版本""更新"这种行也一起清掉
+    document.querySelectorAll('.setRow').forEach(function (r) {
+      var b = r.querySelector('b');
+      if (!b || !(b.textContent || '').trim()) { r.remove(); }
+    });
     document.body.style.overflow = '';
   }
   new MutationObserver(clean).observe(document.body, { childList: true, subtree: true });
