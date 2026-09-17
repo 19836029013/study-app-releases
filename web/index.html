@@ -3641,5 +3641,26 @@ if (location.protocol.startsWith('http') && 'serviceWorker' in navigator) {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fitPhone);
   fitPhone();
 })();
+</script><script>
+/* 设置页精简补丁 2026-09-17：删抽屉换模型行、删两处解释、删设置里三块、设置整屏不锁滚动 */
+(function () {
+  var TXT = ['每级用哪个模型', '版本与更新', '东西都存在哪', '列表来自 DeepSeek 的 /models 接口', '自动 = 不加任何要求'];
+  var IDS = ['setReloadModels', 'setReload', 'setApply', 'setCheck', 'setVer', 'setUpd', 'setModelFrom'];
+  function clean() {
+    document.querySelectorAll('.dwRow[data-act="aiKey"]').forEach(function (n) { n.remove(); });
+    IDS.forEach(function (id) { var e = document.getElementById(id); if (e) { (e.closest('.sect') || e).remove(); } });
+    document.querySelectorAll('.sheet .sb > *').forEach(function (n) {
+      var t = (n.textContent || '').trim();
+      for (var i = 0; i < TXT.length; i++) { if (t.indexOf(TXT[i]) >= 0) { n.remove(); break; } }
+    });
+    document.querySelectorAll('.sheet.on').forEach(function (sh) {
+      var st = (sh.querySelector('.st') || {}).textContent || '';
+      if (st.indexOf('设置') >= 0) { sh.style.height = '96%'; sh.style.maxHeight = '96%'; }
+    });
+    document.body.style.overflow = '';
+  }
+  new MutationObserver(clean).observe(document.body, { childList: true, subtree: true });
+  clean();
+})();
 </script></body>
 </html>
