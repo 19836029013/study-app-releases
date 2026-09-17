@@ -397,6 +397,7 @@ body{
 .aiDaily .dEsc svg{width:13px;height:13px;flex:0 0 13px;margin-top:3px}
 .aiDaily .btn{margin-top:10px}
 .chatPage{display:flex;flex-direction:column;height:100%}
+.chatPage .hdr .iconbtn svg{width:23px;height:23px}
 .chatBody{flex:1 1 0;min-height:0;overflow-y:auto;padding:6px 20px 96px}
 .chatBody::-webkit-scrollbar{width:0}
 .chatComposer{flex:0 0 auto;padding:10px 16px 0;margin-bottom:88px;background:linear-gradient(#fff 72%,rgba(255,255,255,.96))}
@@ -410,11 +411,59 @@ body{
 .cChip.on svg{color:var(--ink)}
 .cModel{margin-left:auto;font-size:11px;color:var(--ink-4);display:flex;align-items:center;gap:3px;white-space:nowrap;cursor:pointer}
 .cModel svg{width:11px;height:11px}
-.chatEmpty{text-align:center;padding:34px 8px 10px;color:var(--ink-3)}
-.chatEmpty .ceLogo{width:52px;height:52px;border-radius:50%;background:#eef2ff;color:#4d6bfe;display:inline-grid;place-items:center;margin-bottom:14px}
-.chatEmpty .ceLogo svg{width:32px;height:32px}
-.chatEmpty .ceTitle{font-size:15px;font-weight:700;color:var(--ink);line-height:1.5}
-.chatEmpty .ceSub{font-size:12px;margin-top:8px;line-height:1.7}
+/* 空状态：圆图标 + 大标题 + 说明 + 建议卡（B 竖排 4 行 / C 2×2 网格） */
+.chatEmpty{padding:8px 0 10px;text-align:center;color:var(--ink-3)}
+.chatEmpty .ceLogo{width:72px;height:72px;border-radius:50%;background:#e9efff;color:#4d6bfe;display:grid;place-items:center;margin:12px auto 0}
+.chatEmpty .ceLogo svg{width:36px;height:36px}
+.chatEmpty.c .ceLogo{background:#f0ebfe;color:#7c5cf0}
+.chatEmpty .ceTitle{font-size:20px;font-weight:800;letter-spacing:-.4px;color:var(--ink);line-height:1.45;margin-top:18px}
+.chatEmpty .ceSub{font-size:13px;line-height:1.75;max-width:302px;margin:10px auto 0}
+.ceRows{margin-top:20px}
+.ceCard{display:flex;align-items:center;gap:11px;width:100%;border:1px solid var(--line);background:#fff;border-radius:16px;
+  padding:11px 12px;margin-bottom:9px;font:inherit;text-align:left;cursor:pointer;transition:transform .15s}
+.ceCard:active{transform:scale(.98)}
+.ceTile{flex:0 0 40px;width:40px;height:40px;border-radius:13px;display:grid;place-items:center}
+.ceTile svg{width:21px;height:21px}
+.ceTile.blue{background:#e9efff;color:#3b6ef6}
+.ceTile.green{background:#e4f6ee;color:#0a9c6b}
+.ceTile.amber{background:#fdf0dc;color:#c07a10}
+.ceTile.purple{background:#f0ebfe;color:#7c5cf0}
+.ceTile.pink{background:#fdeaf4;color:#cf4a90}
+.ceBody{min-width:0;flex:1 1 auto}
+.ceBody b{display:block;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.45}
+.ceBody span{display:block;font-size:11.5px;color:var(--ink-4);line-height:1.6;margin-top:3px}
+.ceRows .ceBody span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ceChev{flex:0 0 auto;color:var(--ink-4);display:grid;place-items:center}
+.ceChev svg{width:15px;height:15px}
+.ceGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}
+.ceGrid .ceCard{align-items:flex-start;gap:9px;padding:11px 10px;margin-bottom:0}
+.ceGrid .ceTile{flex:0 0 34px;width:34px;height:34px;border-radius:11px}
+.ceGrid .ceTile svg{width:18px;height:18px}
+.ceGrid .ceBody b{font-size:12.5px;padding-top:7px}
+.ceGrid .ceBody span{font-size:11px;margin-top:5px}
+.ceGrid .ceChev{padding-top:8px}
+/* 底部输入区：胶囊输入框，下一行 = + / 模型胶囊 / 强度胶囊 / 深色发送键 */
+.cInput{display:flex;align-items:flex-end;margin-bottom:10px}
+.cInput textarea{flex:1 1 auto;border:1px solid var(--line-2);background:#fff;border-radius:22px;padding:13px 16px;
+  font:inherit;font-size:14px;line-height:1.5;min-height:48px;max-height:96px;resize:none;outline:none;color:var(--ink)}
+.cInput textarea::placeholder{color:var(--ink-4)}
+.cActs{display:flex;align-items:center;gap:8px}
+.cPlus{width:38px;height:38px;flex:0 0 38px;border-radius:50%;border:1px solid var(--line-2);background:#fff;
+  color:var(--ink-2);display:grid;place-items:center;cursor:pointer}
+.cPlus svg{width:18px;height:18px}
+.cPlus:active{transform:scale(.94)}
+.cPill{border:1px solid var(--line-2);background:#fff;border-radius:999px;padding:9px 11px;font:inherit;font-size:11.5px;
+  font-weight:600;color:var(--ink-2);display:flex;align-items:center;gap:5px;cursor:pointer;white-space:nowrap;min-width:0}
+.cPill svg{width:14px;height:14px;flex:0 0 14px;color:var(--ink-3)}
+.cPill .nm{min-width:0;max-width:118px;overflow:hidden;text-overflow:ellipsis}
+.cPill .cw{display:grid;place-items:center;color:var(--ink-4)}
+.cPill .cw svg{width:11px;height:11px}
+.cPill:active{transform:scale(.97)}
+.cSend{width:38px;height:38px;flex:0 0 38px;margin-left:auto;border-radius:50%;border:0;background:#111214;color:#fff;
+  display:grid;place-items:center;cursor:pointer;opacity:.42;transition:opacity .2s}
+.cSend svg{width:19px;height:19px}
+.cSend.on{opacity:1}
+.cSend:active{transform:scale(.94)}
 .groupRow{display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:700;color:var(--ink-2);padding:14px 0 4px}
 .groupRow .tail{margin-left:auto;font-size:11px;color:var(--ink-4);font-weight:600}
 .groupRow .gGlyph{display:grid;place-items:center;color:var(--ink-3)}
@@ -718,18 +767,6 @@ body{
 .aiStatus.off{background:#f3f4f6;color:var(--ink-3)}
 .aiStatus.off button{color:var(--ink-2)}
 
-/* 总大脑给的排期卡 */
-.aiPlan{border:1px solid #dfe6f5;background:#f7faff;border-radius:14px;padding:12px 13px;margin-top:12px}
-.aiPlan .ph{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:#1b3f9c;margin-bottom:8px}
-.aiPlan .ph svg{width:14px;height:14px}
-.aiPlan .pl{font-size:13.5px;font-weight:700;line-height:1.6;margin-bottom:8px;color:var(--ink)}
-.aiPlan ul{margin:0 0 10px;padding-left:18px}
-.aiPlan li{font-size:12.8px;line-height:1.7;color:var(--ink-2);margin-bottom:3px}
-.planTask{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:6px;font-size:12.5px;line-height:1.5}
-.planTask .pd{font-size:11px;font-weight:800;color:#1b3f9c;background:#eef4ff;border-radius:6px;padding:2px 6px;flex:0 0 auto;font-variant-numeric:tabular-nums}
-.planTask .pm{margin-left:auto;font-size:11px;color:var(--ink-4);white-space:nowrap}
-.aiPlan .pw{font-size:11.5px;color:#8a5a00;background:#fff6e6;border-radius:10px;padding:8px 10px;margin-top:6px;line-height:1.6}
-.aiPlan .btn{margin-top:10px}
 /* ===== 只看手机：隐藏左侧原型目录；手机居中，并在任意窗口尺寸下完整可见 ===== */
 .board{display:none!important}
 .stage{display:block;height:100vh;min-height:0;overflow:hidden}
@@ -793,7 +830,7 @@ async function fetchModels() {
   } catch (e) { return { ok: false, reason: e.message, models: MODELS_FALLBACK }; }
 }
 const modelOptions = () => (modelCache.length ? modelCache : MODELS_FALLBACK);
-/** 每一级（A/B/C）各自的模型与思考等级；没设过就给默认 */
+/** 每一级（B 助教 / C 问答）各自的模型与思考等级；没设过就给默认 */
 function levelCfg(kind) {
   const s = settings();
   s.levels = s.levels || {};
@@ -803,6 +840,11 @@ function levelCfg(kind) {
 }
 const EFFORTS = [['auto', '自动'], ['low', '低'], ['medium', '中'], ['high', '高']];
 const effortLabel = (v) => (EFFORTS.find((e) => e[0] === v) || EFFORTS[0])[1];
+/* AI 页只有两级：B 助教（assistant）/ C 问答（chat）。kind 的取值和后端线程 id 都不变 */
+const LEVEL_NAME = { assistant: 'B · 助教', chat: 'C · 问答' };
+const LEVEL_SUB = { assistant: '学习辅导 · 步步引导 · 巩固提升', chat: '快速回答 · 获取信息 · 解决问题' };
+const levelName = (k) => LEVEL_NAME[k] || LEVEL_NAME.chat;
+const levelSub = (k) => LEVEL_SUB[k] || LEVEL_SUB.chat;
 const apiBase = () => (settings().apiBase || '').replace(/\/$/, '');
 const apiURL = (p) => (apiBase() ? apiBase() + p : p);
 const aiMode = () => settings().aiMode || (IS_APP ? 'direct' : 'server');
@@ -860,6 +902,10 @@ const ICONS = {
   chart: S('<path d="M5 19V11"/><path d="M12 19V5"/><path d="M19 19v-5"/>', 'stroke-width="2"'),
   target: S('<circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="4.4"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/>'),
   checkSquare: S('<rect x="4" y="4" width="16" height="16" rx="4"/><path d="m8.4 12.4 2.6 2.6 4.8-5.2"/>'),
+  compose: S('<path d="M12 4.6H6.6A2.1 2.1 0 0 0 4.5 6.7v10.7a2.1 2.1 0 0 0 2.1 2.1h10.7a2.1 2.1 0 0 0 2.1-2.1V12"/><path d="M17.4 3.8a2 2 0 0 1 2.8 2.8l-7.1 7.1-3.5.7.7-3.5 7.1-7.1z"/>'),
+  book: S('<path d="M12 6.5C10.4 5.1 8.5 4.5 6 4.5H4.3a.9.9 0 0 0-.9.9v11.3c0 .5.4.9.9.9H6c2.5 0 4.4.6 6 2 1.6-1.4 3.5-2 6-2h1.7a.9.9 0 0 0 .9-.9V5.4a.9.9 0 0 0-.9-.9H18c-2.5 0-4.4.6-6 2z"/><path d="M12 6.5v13.1"/>'),
+  bubble: S('<path d="M4.6 4.6h14.8a2.1 2.1 0 0 1 2.1 2.1v7.7a2.1 2.1 0 0 1-2.1 2.1h-7.6l-5.4 3.9v-3.9H4.6a2.1 2.1 0 0 1-2.1-2.1V6.7a2.1 2.1 0 0 1 2.1-2.1z"/><circle cx="8.4" cy="10.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="12" cy="10.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="15.6" cy="10.5" r="1.1" fill="currentColor" stroke="none"/>'),
+  image: S('<rect x="3.5" y="4.6" width="17" height="14.8" rx="3"/><circle cx="9" cy="10" r="1.7"/><path d="m5 17.8 4.4-4a1.6 1.6 0 0 1 2.2 0l2.3 2.1 1.9-1.7a1.6 1.6 0 0 1 2.2 0l1.5 1.4"/>'),
 };
 
 /* 小鲸鱼（AI 图标）——DeepSeek 那种蓝底白鲸的简化版 */
@@ -1794,7 +1840,6 @@ function render(mode = 'update') {
 let aiOpen = false, aiCtx = { docId: null, idx: 0, kind: 'chat' }, aiModel = 'local', aiThink = false, aiBusy = false;
 let backend = { online: false, hasKey: false, mock: true, model: '' };   // 后端（DeepSeek）连接状态
 let remoteMsgs = [];        // 连上后端时，会话内容由后端保存，这里只做渲染
-let lastPlan = null;        // 总大脑最后给的那份排期
 let streamNode = null;      // 正在流式输出的那条消息
 let aiAttach = true;        // 聊天页的"带资料"开关：发送时把本节原文 + 本地检索结果一起给模型
 const chatKey = () => aiCtx.docId || 'global';
@@ -1886,7 +1931,7 @@ function aiMsgHTML(m) {
     </div>
   </div>`;
 }
-/** 一条 AI 回答的正文（文字 + 出处卡片 + 总大脑排期卡），流式更新时也用它 */
+/** 一条 AI 回答的正文（文字 + 出处卡片 + 助教日报卡），流式更新时也用它 */
 function aiAnswerBody(m) {
   let text = String(m.text || '');
   if (m.streaming) text = text.replace(/```plan[\s\S]*$/, '');   // 流式时先别把半截 JSON 漏出来
@@ -1896,17 +1941,16 @@ function aiAnswerBody(m) {
     `<div class="aiSrc" data-act="aiJump" data-v="${s.docId}:${s.idx}">
        <div class="top"><span>${esc(s.title)}</span><span class="go">跳过去看 →</span></div>${esc(s.snippet)}
      </div>`).join('');
-  const plan = m.plan ? planHTML(m.plan, currentMsgs().indexOf(m)) : '';
   const daily = m.daily ? dailyHTML(m.daily, currentMsgs().indexOf(m)) : '';
   const handoff = m.kind === 'handoff' || m.kind === 'miss'
     ? `<button class="btn" style="margin:10px 0 0 0" data-act="aiDeepSeek">${m.kind === 'miss' ? '复制问题并去 DeepSeek 问' : '打开 DeepSeek 继续追问'}</button>` : '';
-  return body + srcs + daily + plan + handoff;
+  return body + srcs + daily + handoff;
 }
 function aiComposerHTML() {
   const label = backend.online ? `${backend.model || 'deepseek'} · 后端` : (AI_MODELS.find((x) => x[0] === aiModel) || AI_MODELS[0])[1];
   const status = backend.online
     ? (backend.hasKey
-      ? `<div class="aiStatus on">${ICONS.spark}<span>已连后端 · ${esc(backend.model)}${aiCtx.kind === 'brain' ? ' · 总大脑模式' : ' · 学科助教'}</span>
+      ? `<div class="aiStatus on">${ICONS.spark}<span>已连后端 · ${esc(backend.model)} · ${levelName(aiCtx.kind)}</span>
            <button data-act="aiThreads">切换会话</button></div>`
       : `<div class="aiStatus demo">${ICONS.spark}<span>演示模式：后端在跑，但还没配 DeepSeek Key（回复是假的）</span>
            <button data-act="aiKey">填入 Key</button></div>`)
@@ -1924,9 +1968,7 @@ function aiComposerHTML() {
       <button class="aiSend" id="aiSend" data-act="aiSend">${ICONS.send}</button>
     </div>
     <div class="aiNote">${ICONS.spark}<span>${backend.online
-      ? (aiCtx.kind === 'brain'
-        ? '总大脑每次都会看到：你的整体进度、任务完成情况、笔记与错题、以及各个子对话的摘要。'
-        : '这条回答会把当前这一节的原文 + 你的整体进度一起发给 DeepSeek。')
+      ? '这条回答会把当前这一节的原文 + 你的整体进度一起发给 DeepSeek。'
       : '回答来自你自己的 7 本资料（本地检索，不联网、不编造）；启动后端后就是真模型回答。'}</span></div>`;
 }
 
@@ -1938,13 +1980,12 @@ function drawerHTML() {
     `<button class="dwRow ${on ? 'on' : ''}" data-act="${act}"${v ? ` data-v="${v}"` : ''}>${icon}<span>${name}</span><span class="tail">${tail || ''}</span></button>`;
   return `
     <div class="dwHd">
-      <div><div class="dwTitle">AI 助手</div><div class="dwSub">A 总大脑 · B 助教 · C 问答</div></div>
+      <div><div class="dwTitle">AI 助手</div><div class="dwSub">B 助教 · C 问答</div></div>
       <button class="iconbtn" data-act="closeDrawer" title="收起">${ICONS.back}</button>
     </div>
     <button class="dwNew" data-act="drawerNew">${ICONS.plus}<span>新对话</span></button>
     ${row('aiThreads', '', ICONS.list, '全部对话', '<span id="dwAll">…</span>')}
     <div class="dwGrp">级别</div>
-    ${row('level', 'brain', ICONS.compass, 'A · 总大脑', '方向 · 规划', lv === 'brain')}
     ${row('level', 'assistant', ICONS.doc, 'B · 助教', '每日复盘', lv === 'assistant')}
     ${row('level', 'chat', ICONS.pen, 'C · 问答', '随手问', lv === 'chat')}
     <div class="dwGrp">按课程</div>
@@ -2067,9 +2108,9 @@ async function openSettingsSheet() {
     ${aiBlock}
     <div class="sect" style="padding:6px 0 0">
       <div class="h">每级用哪个模型 / 思考到几档</div>
-      ${['brain', 'assistant', 'chat'].map((k) => {
+      ${['assistant', 'chat'].map((k) => {
         const c = levelCfg(k);
-        const name = k === 'brain' ? 'A · 总导师' : k === 'assistant' ? 'B · 助教' : 'C · 问答';
+        const name = levelName(k);
         return `<div style="margin:10px 0 12px">
           <div style="font-size:12.5px;font-weight:700;margin-bottom:6px">${name}</div>
           <select data-lv-model="${k}" style="width:100%;border:1px solid var(--line-2);border-radius:12px;padding:10px;font:inherit;font-size:12.5px;background:var(--bg-soft)">
@@ -2080,7 +2121,7 @@ async function openSettingsSheet() {
           </select>
         </div>`;
       }).join('')}
-      <button class="btn" id="setSaveLevels">保存这三组设置</button>
+      <button class="btn" id="setSaveLevels">保存这两组设置</button>
       <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
         <button class="btn ghost" id="setReloadModels" style="margin-top:0">刷新模型列表</button>
         <span id="setModelFrom" style="font-size:11px;color:var(--ink-4);line-height:1.5"></span>
@@ -2125,7 +2166,7 @@ async function openSettingsSheet() {
     toast(settings().apiKey ? '已保存，现在可以直接问 DeepSeek 了' : 'Key 是空的');
   });
   $v('#setSaveLevels').addEventListener('click', () => {
-    ['brain', 'assistant', 'chat'].forEach((k) => {
+    ['assistant', 'chat'].forEach((k) => {
       const m = $v(`[data-lv-model="${k}"]`), e = $v(`[data-lv-effort="${k}"]`);
       if (m) settings().levels[k] = { model: m.value, effort: e ? e.value : 'auto' };
     });
@@ -2147,13 +2188,13 @@ async function openSettingsSheet() {
   fillModels();
   $v('#setReloadModels').addEventListener('click', () => { toast('重新读模型列表…'); fillModels(); });
   /* 改一下就存一下：不用再点"保存这三组设置"，也不会因为忘了点而丢配置 */
-  ['brain', 'assistant', 'chat'].forEach((k) => {
+  ['assistant', 'chat'].forEach((k) => {
     [['model', `[data-lv-model="${k}"]`], ['effort', `[data-lv-effort="${k}"]`]].forEach(([key, sel]) => {
       const el = $v(sel);
       if (el) el.addEventListener('change', () => {
         settings().levels[k] = Object.assign({}, levelCfg(k), { [key]: el.value });
         saveState();
-        toast(`${k === 'brain' ? 'A 总导师' : k === 'assistant' ? 'B 助教' : 'C 问答'} 的${key === 'model' ? '模型' : '推理强度'}已保存`);
+        toast(`${levelName(k)} 的${key === 'model' ? '模型' : '推理强度'}已保存`);
         if ($('#chatBody')) aiPaint();
       });
     });
@@ -2325,12 +2366,7 @@ function setLevelRefresh() {
   closeDrawer();
   if ($('.chatPage')) {
     const t = $('#chatTitle');
-    if (t) {
-      t.textContent = aiCtx.kind === 'brain' ? '总大脑'
-        : aiCtx.kind === 'assistant' ? '助教 · 每日复盘'
-          : (aiCtx.threadTitle || (aiCtx.docId && DOCS[aiCtx.docId] ? DOCS[aiCtx.docId].title : '随手问'));
-    }
-    $$('.lv').forEach((b) => b.classList.toggle('on', b.dataset.v === aiCtx.kind));
+    if (t) t.textContent = levelName(aiCtx.kind);
     const dw = $('#dwBody');
     if (dw) dw.innerHTML = drawerHTML();
     ensureChatThread();
@@ -2340,10 +2376,10 @@ function setLevelRefresh() {
   }
 }
 function setLevel(kind) {
-  if (aiCtx.kind === kind) { closeDrawer(); return; }
+  const to = kind === 'assistant' ? 'assistant' : 'chat';
+  if (aiCtx.kind === to) { closeDrawer(); return; }
   if (aiCtx.kind === 'chat') lastC = { docId: aiCtx.docId, idx: aiCtx.idx, threadId: aiCtx.threadId, threadTitle: aiCtx.threadTitle, threadSub: aiCtx.threadSub };
-  if (kind === 'brain') aiCtx = { docId: null, idx: 0, kind: 'brain', threadId: 'brain' };
-  else if (kind === 'assistant') aiCtx = { docId: null, idx: 0, kind: 'assistant', threadId: 'assistant' };
+  if (to === 'assistant') aiCtx = { docId: null, idx: 0, kind: 'assistant', threadId: 'assistant' };
   else {
     const c = lastC || {};
     aiCtx = { docId: c.docId || null, idx: c.idx || 0, kind: 'chat', threadId: c.threadId || 'global', threadTitle: c.threadTitle, threadSub: c.threadSub };
@@ -2351,7 +2387,7 @@ function setLevel(kind) {
   remoteMsgs = [];
   aiCtx.loadedThread = null;
   setLevelRefresh();
-  toast(aiCtx.kind === 'brain' ? '切到 A 级：总大脑（方向、规划）' : aiCtx.kind === 'assistant' ? '切到 B 级：助教（每日复盘）' : '切到 C 级：问答');
+  toast(to === 'assistant' ? '切到 B · 助教' : '切到 C · 问答');
 }
 function applyDaily(d) {
   if (!d || !(d.suggest || []).length) { toast('这份日报里没有可写入的任务'); return; }
@@ -2367,18 +2403,30 @@ function applyDaily(d) {
   saveState();
   toast(n ? `已写进明天（${key.slice(5)}）的任务：${n} 条` : '这些任务已经在列表里了');
 }
+/* 空状态：B 竖排 4 行，C 2×2 网格；点一下按示例话术直接发出去 */
 function emptyChatHTML() {
-  return `<div class="chatEmpty">
-    <span class="ceLogo">${WHALE}</span>
-    <div class="ceTitle">问这一节的问题，或者问下一步怎么走</div>
-    <div class="ceSub">${backend.online
-      ? (backend.hasKey ? '下面选一条开始，或者直接打字。' : '后端在跑但还没配 API Key，现在是演示模式。')
-      : '没连后端：回答会从你自己的资料里检索。'}</div>
-    <div class="aiChips" style="margin:14px 0 0;justify-content:center">
-      <button data-act="aiChip" data-v="我该先学哪一部分？">我该先学哪一部分？</button>
-      <button data-act="aiChip" data-v="View Matrix 为什么要用逆矩阵？">View Matrix 为什么要用逆矩阵？</button>
-      <button data-act="aiChip" data-v="用美术生能懂的话讲一遍">用美术生能懂的话讲一遍</button>
-    </div>
+  const b = aiCtx.kind === 'assistant';
+  const cards = b
+    ? [['blue', ICONS.doc, '讲解一个知识点', '帮我讲一下线性回归的原理'],
+      ['green', ICONS.list, '检查我的解题思路', '我这样做对吗？帮我看看'],
+      ['amber', ICONS.pen, '生成练习题', '出几道相关的练习题'],
+      ['purple', ICONS.chart, '制定学习计划', '帮我规划本周的 GAMES101 学习']]
+    : [['blue', ICONS.search, '解释一个概念', '什么是 PBR？'],
+      ['purple', ICONS.code, '帮我写一段代码', '用 Python 生成随机地图'],
+      ['amber', ICONS.bulb, '给一些建议', '我该如何开始学习 Shader？'],
+      ['pink', ICONS.image, '分析一段内容', '帮我看看这张图有什么问题']];
+  const card = ([tone, icon, title, say]) => `<button class="ceCard" data-act="aiChip" data-v="${esc(say)}">
+      <span class="ceTile ${tone}">${icon}</span>
+      <span class="ceBody"><b>${esc(title)}</b><span>“${esc(say)}”</span></span>
+      <span class="ceChev">${ICONS.chev}</span>
+    </button>`;
+  return `<div class="chatEmpty${b ? '' : ' c'}">
+    <div class="ceLogo">${b ? ICONS.book : ICONS.bubble}</div>
+    <div class="ceTitle">${b ? '你好，我是你的学习助教' : '你好，有什么我可以帮助的吗?'}</div>
+    <div class="ceSub">${b
+      ? '我可以一步步引导你理解知识点、检查你的思路，并提供练习与反馈。'
+      : '我可以回答问题、提供信息、给出建议，帮你解决学习与生活中的各种疑问。'}</div>
+    <div class="${b ? 'ceRows' : 'ceGrid'}">${cards.map(card).join('')}</div>
   </div>`;
 }
 function chatComposerHTML() {
@@ -2386,18 +2434,20 @@ function chatComposerHTML() {
   const cfg = levelCfg(aiCtx.kind);
   return `
     <div class="cChips">
-      <button class="cChip" data-act="pickModel">${esc(cfg.model)} ${ICONS.chevDown}</button>
-      <button class="cChip" data-act="pickEffort">推理强度：${esc(effortLabel(cfg.effort))}</button>
       <button class="cChip ${aiAttach ? 'on' : ''}" data-act="aiAttach">${ICONS.doc}带资料</button>
       <span class="cModel">${esc(label)}</span>
     </div>
-    <div class="aiInput">
-      <button class="aiPlus" data-act="aiPlus" title="插入当前小节文字">${ICONS.plus}</button>
+    <div class="cInput">
       <textarea id="aiText" rows="1" placeholder="发送消息，按 Enter 换行"></textarea>
-      <button class="aiSend" id="aiSend" data-act="aiSend">${ICONS.send}</button>
+    </div>
+    <div class="cActs">
+      <button class="cPlus" data-act="aiPlus" title="插入当前小节文字">${ICONS.plus}</button>
+      <button class="cPill" data-act="pickModel" title="换模型">${ICONS.cube}<span class="nm">${esc(cfg.model)}</span><span class="cw">${ICONS.chevDown}</span></button>
+      <button class="cPill" data-act="pickEffort" title="换推理强度">${ICONS.target}<span class="nm">${esc(effortLabel(cfg.effort))}</span><span class="cw">${ICONS.chevDown}</span></button>
+      <button class="cSend" id="aiSend" data-act="aiSend">${ICONS.send}</button>
     </div>
     <div class="aiNote">${ICONS.spark}<span>${backend.online
-      ? (aiCtx.kind === 'brain' ? '这是总大脑：它能看到你的进度、任务、笔记错题和各子对话摘要。' : '这条对话会把当前这一节的原文 + 你的进度一起发过去。')
+      ? '这条对话会把当前这一节的原文 + 你的进度一起发过去。'
       : '离线模式：回答来自你本机资料检索。'}</span></div>`;
 }
 function bindComposer() {
@@ -2422,17 +2472,15 @@ function paintChatPage() {
   if (comp) {
     const fresh = chatComposerHTML();
     if (!comp.dataset.done) { comp.innerHTML = fresh; comp.dataset.done = '1'; }
-    else { const c = comp.querySelector('.cChips'); if (c) c.outerHTML = fresh.split('<div class="aiInput">')[0]; }
+    else { const c = comp.querySelector('.cChips'); if (c) c.outerHTML = fresh.split('<div class="cInput">')[0]; }
   }
   const t = $('#chatTitle'), s = $('#chatSub');
-  if (t) t.textContent = aiCtx.kind === 'brain' ? '总大脑'
-    : aiCtx.kind === 'assistant' ? '助教 · 每日复盘'
-      : (aiCtx.threadTitle || (aiCtx.docId && DOCS[aiCtx.docId] ? DOCS[aiCtx.docId].title : '随手问'));
+  if (t) t.textContent = levelName(aiCtx.kind);
   if (s) {
     const last = msgs[msgs.length - 1];
     s.textContent = msgs.length
       ? `${msgs.length} 条消息 · ${new Date(last.at || Date.now()).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}`
-      : (aiCtx.kind === 'brain' ? '规划 · 建议 · 总导师' : aiCtx.kind === 'assistant' ? '每日复盘 · 注意事项 · 细节反馈' : '随手问，随时记');
+      : levelSub(aiCtx.kind);
   }
   bindComposer();
   body.scrollTop = body.scrollHeight;
@@ -2440,31 +2488,26 @@ function paintChatPage() {
 function screenChat() {
   const msgs = currentMsgs();
   const last = msgs[msgs.length - 1];
-  const title = aiCtx.kind === 'brain' ? '总大脑' : aiCtx.kind === 'assistant' ? '助教 · 每日复盘' : (aiCtx.threadTitle || '随手问');
+  const title = levelName(aiCtx.kind);
   const sub = msgs.length
     ? `${msgs.length} 条消息 · ${new Date(last.at || Date.now()).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}`
-    : (aiCtx.kind === 'brain' ? '规划 · 建议 · 总导师' : '随手问，随时记');
+    : levelSub(aiCtx.kind);
   return `
   <div class="chatPage">
     <div class="drawerMask" id="drawerMask" data-act="closeDrawer"></div>
     <aside class="drawer" id="drawer"><div class="dwBody" id="dwBody">${drawerHTML()}</div></aside>
     <div class="hdr" style="padding-bottom:10px">
-      <div style="min-width:0;display:flex;gap:8px;align-items:flex-start">
-        ${chatReturn ? `<button class="iconbtn" data-act="chatBack" style="margin-top:5px" title="回到刚才那一节">${ICONS.back}</button>` : ''}
-        <div>
+      <div style="min-width:0;flex:1 1 auto;display:flex;gap:10px;align-items:flex-start">
+        ${chatReturn ? `<button class="iconbtn" data-act="chatBack" style="margin-top:6px" title="回到刚才那一节">${ICONS.back}</button>` : ''}
+        <button class="iconbtn" data-act="drawer" style="margin-top:6px" title="最近聊天（也可以从屏幕左边缘右滑）">${ICONS.list}</button>
+        <div style="min-width:0">
           <h1 class="h1" style="font-size:25px" id="chatTitle">${esc(title)}</h1>
           <div class="sub" id="chatSub">${esc(sub)}</div>
         </div>
       </div>
       <div class="acts">
-        <button class="iconbtn" data-act="drawer" title="最近聊天（也可以从屏幕左边缘右滑）">${ICONS.list}</button>
-        <button class="iconbtn" data-act="aiThreads" title="全部对话">${ICONS.more}</button>
+        <button class="iconbtn" data-act="drawerNew" title="新建对话">${ICONS.compose}</button>
       </div>
-    </div>
-    <div class="lvSeg">
-      <button class="lv ${aiCtx.kind === 'brain' ? 'on' : ''}" data-act="level" data-v="brain">A · 总大脑</button>
-      <button class="lv ${aiCtx.kind === 'assistant' ? 'on' : ''}" data-act="level" data-v="assistant">B · 助教</button>
-      <button class="lv ${aiCtx.kind === 'chat' ? 'on' : ''}" data-act="level" data-v="chat">C · 问答</button>
     </div>
     <div class="chatBody" id="chatBody">${msgs.length ? msgs.map(aiMsgHTML).join('') : emptyChatHTML()}</div>
     <div class="chatComposer" id="chatComposer">${chatComposerHTML()}</div>
@@ -2519,9 +2562,9 @@ function aiPaint() {
   const where = $('#aiWhere');
   if (where) {
     const doc = aiCtx.docId ? DOCS[aiCtx.docId] : null;
-    where.textContent = aiCtx.kind === 'brain'
-      ? `总大脑 · 规划与建议${backend.online && backend.hasKey ? '' : '（未连模型）'}`
-      : doc ? `${doc.title} · ${doc.sections[aiCtx.idx].tab || doc.sections[aiCtx.idx].title}` : '全部 7 本资料';
+    where.textContent = doc
+      ? `${doc.title} · ${doc.sections[aiCtx.idx].tab || doc.sections[aiCtx.idx].title}`
+      : `${levelName(aiCtx.kind)}${backend.online && backend.hasKey ? '' : '（未连模型）'}`;
   }
   body.innerHTML = chat.map(aiMsgHTML).join('') + (aiBusy && !backend.online ? `
     <div class="aiMsg ai" id="aiTyping"><div class="av">${WHALE}</div>
@@ -2545,20 +2588,20 @@ function aiPaint() {
   body.scrollTop = body.scrollHeight;
 }
 function openAI(docId, idx, kind) {
-  const isBrain = (kind || aiCtx.kind) === 'brain' && !docId;
-  aiCtx = { docId: docId || null, idx: Number(idx) || 0, kind: isBrain ? 'brain' : 'chat' };
+  const want = kind || aiCtx.kind;
+  aiCtx = { docId: docId || null, idx: Number(idx) || 0, kind: (want === 'assistant' && !docId) ? 'assistant' : 'chat' };
   aiOpen = true;
   state.chats = state.chats || {};
   if (backend.online) {
     // 连了后端：会话内容以后端为准
-    const tid = isBrain ? 'brain' : (aiCtx.docId ? `doc-${aiCtx.docId}` : 'global');
+    const tid = aiCtx.docId ? `doc-${aiCtx.docId}` : (aiCtx.kind === 'assistant' ? 'assistant' : 'global');
     const doc = aiCtx.docId ? DOCS[aiCtx.docId] : null;
     const sec = doc ? doc.sections[aiCtx.idx] : null;
     const wrap0 = aiShell();
     aiPaint();
     markTab('ai');
     requestAnimationFrame(() => { $('#aiMask', wrap0).classList.add('on'); $('#aiPanel', wrap0).classList.add('on'); });
-    loadRemoteThread(tid, aiCtx.kind, isBrain ? '总大脑' : (doc ? doc.title : '随手问'), sec ? (sec.tab || sec.title) : '全部资料')
+    loadRemoteThread(tid, aiCtx.kind, doc ? doc.title : levelName(aiCtx.kind), sec ? (sec.tab || sec.title) : '全部资料')
       .then(() => { if (aiOpen) aiPaint(); });
     probeBackend().then(() => { if (aiOpen) aiPaint(); });
     return;
@@ -2634,7 +2677,7 @@ function aiDeepSeek() {
 }
 
 /* =========================================================================
-   接后端：总大脑 / 子对话（真实 DeepSeek）
+   接后端：助教 / 问答两条会话线（真实 DeepSeek）
    ========================================================================= */
 const EXAM_DATE = '2026-09-19';           // 计算机一级考试（备考指南里的 9/19–21 首日）
 async function probeBackend() {
@@ -2649,7 +2692,7 @@ async function probeBackend() {
   }
   return backend;
 }
-/** 把"学习数据快照"同步给后端 —— 总大脑就是靠它知道你的进度 */
+/** 把"学习数据快照"同步给后端 —— B 助教就是靠它知道你的进度 */
 function stateSnapshotForBrain() {
   const courses = COURSES.map((c) => {
     const s = courseStat(c);
@@ -2673,7 +2716,7 @@ function pushSnapshot() {
     }).catch(() => {});
   }, 600);
 }
-/** 从回答里把总大脑给的排期（```plan 代码块）抠出来 */
+/** 从回答里把 ```plan 代码块抠掉（A 级排期卡已取消，这里只负责别把半截 JSON 漏到正文里） */
 function parsePlan(text) {
   const m = String(text || '').match(/```plan\s*([\s\S]*?)```/);
   if (!m) return { text, plan: null };
@@ -2704,68 +2747,38 @@ function dailyHTML(d, idx) {
     ${d.review ? `<div class="dRow"><b>今日复盘</b><span>${esc(d.review)}</span></div>` : ''}
     ${(d.watch || []).length ? `<div class="dRow"><b>注意</b><span>${d.watch.map((w) => esc(w)).join('<br>')}</span></div>` : ''}
     ${(d.suggest || []).length ? `<div class="dRow"><b>建议</b><span>${d.suggest.map((s) => `${esc(s.title || '')}${s.min ? `（${s.min}′）` : ''}`).join('<br>')}</span></div>` : ''}
-    ${d.escalate ? `<div class="dEsc">${ICONS.spark}这条已上报给总导师${d.escalateWhy ? '：' + esc(d.escalateWhy) : ''}</div>` : ''}
+    ${d.escalate ? `<div class="dEsc">${ICONS.spark}这条标记为需要重点跟进${d.escalateWhy ? '：' + esc(d.escalateWhy) : ''}</div>` : ''}
     ${(d.suggest || []).length ? `<button class="btn" data-act="aiDailyApply" data-v="${idx}">把建议写进明天的任务</button>` : ''}
   </div>`;
 }
-function planHTML(plan, idx) {
-  if (!plan) return '';
-  const tasks = (plan.tasks || []).map((t) => {
-    const c = COURSES.find((x) => x.id === t.course);
-    return `<div class="planTask"><span class="pd">${esc((t.date || '').slice(5))}</span><span>${esc(t.title || '')}</span>
-      <span class="pm">${t.min || 30}′${c ? ' · ' + esc(c.name) : ''}</span></div>`;
-  }).join('');
-  return `<div class="aiPlan">
-    <div class="ph">${ICONS.spark}总大脑的排期</div>
-    ${plan.headline ? `<div class="pl">${esc(plan.headline)}</div>` : ''}
-    ${(plan.focus || []).length ? `<ul>${plan.focus.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
-    ${tasks}
-    ${(plan.warn || []).length ? `<div class="pw">${plan.warn.map((w) => '⚠️ ' + esc(w)).join('<br>')}</div>` : ''}
-    ${tasks ? `<button class="btn" data-act="aiPlanApply" data-v="${idx}">把这 ${(plan.tasks || []).length} 条写进我的任务</button>` : ''}
-  </div>`;
-}
-function applyPlan(plan) {
-  if (!plan || !plan.tasks || !plan.tasks.length) { toast('这份排期里没有可写入的任务'); return; }
-  let n = 0;
-  plan.tasks.forEach((t) => {
-    const date = /^\d{4}-\d{2}-\d{2}$/.test(t.date || '') ? t.date : todayKey;
-    state.tasks[date] = state.tasks[date] || [];
-    const dup = state.tasks[date].some((x) => x.title === t.title);
-    if (dup) return;
-    state.tasks[date].push({ title: t.title || '（总大脑安排）', course: t.course || 'nc1', min: Number(t.min) || 30, done: false });
-    n++;
-  });
-  saveState();
-  toast(n ? `已写进任务：${n} 条` : '这些任务已经在列表里了');
-}
-/** 打开某条会话的历史（后端保存的） */
-/** 整页聊天：确认当前会话（没选过就默认总大脑），并把后端存的记录拉下来 */
+/** 整页聊天：确认当前会话（没选过就默认 B 助教），并把后端存的记录拉下来 */
 function ensureChatThread() {
-  if (aiCtx.kind !== 'brain' && !aiCtx.docId && !aiCtx.threadId) aiCtx.kind = 'brain';
-  if (!aiCtx.threadId) aiCtx.threadId = aiCtx.kind === 'brain' ? 'brain' : (aiCtx.docId ? `doc-${aiCtx.docId}` : 'global');
+  if (aiCtx.kind !== 'assistant' && aiCtx.kind !== 'chat') aiCtx.kind = 'assistant';   // 旧数据里的其他级别一律落到 B
+  if (aiCtx.kind === 'chat' && !aiCtx.docId && !aiCtx.threadId) aiCtx.kind = 'assistant';   // 什么都没选 = B 助教
+  if (!aiCtx.threadId) aiCtx.threadId = aiCtx.kind === 'assistant' ? 'assistant' : (aiCtx.docId ? `doc-${aiCtx.docId}` : 'global');
   if (IS_APP && aiMode() === 'direct') { remoteMsgs = []; aiCtx.loadedThread = aiCtx.threadId; return; }   // 手机直连：对话存在本机
   if (!backend.online || aiCtx.loadedThread === aiCtx.threadId) return;
   const doc = aiCtx.docId ? DOCS[aiCtx.docId] : null;
   const sec = doc ? doc.sections[aiCtx.idx] : null;
-  loadRemoteThread(aiCtx.threadId, aiCtx.kind, aiCtx.kind === 'brain' ? '总大脑' : (doc ? doc.title : '随手问'), sec ? (sec.tab || sec.title) : '全部资料')
+  loadRemoteThread(aiCtx.threadId, aiCtx.kind, doc ? doc.title : levelName(aiCtx.kind), sec ? (sec.tab || sec.title) : '全部资料')
     .then(() => { aiCtx.loadedThread = aiCtx.threadId; if ($('#chatBody')) paintChatPage(); });
 }
-/** 会话列表：总大脑 + 各科子对话（带难易度，这就是"总大脑知道你问了什么"的来源） */
+/** 会话列表：B 助教 + 各科子对话（带难易度） */
 async function openThreadList() {
   if (!backend.online) {
-    sheet('会话', `<div class="empty">现在是离线模式，没有后端可切。<br>启动 server 之后，这里会列出「总大脑」和各个子对话。</div>`);
+    sheet('会话', `<div class="empty">现在是离线模式，没有后端可切。<br>启动 server 之后，这里会列出「B 助教」和各个子对话。</div>`);
     return;
   }
   let list = [];
   try {
     const r = await fetch('/api/threads', { cache: 'no-store' });
     const j = await r.json();
-    list = j.threads || [];
+    list = (j.threads || []).filter((t) => t.id !== 'brain');    // A 级已取消，它的旧会话不再列出来
   } catch (e) { toast('读会话列表失败'); return; }
-  const brain = list.find((t) => t.id === 'brain');
-  const chats = list.filter((t) => t.id !== 'brain');
+  const assist = list.find((t) => t.id === 'assistant');
+  const chats = list.filter((t) => t.id !== 'assistant');
   const row = (t) => `<div class="item" data-thread="${t.id}">
-      <span class="idx">${t.id === 'brain' ? '★' : '·'}</span>
+      <span class="idx">${t.id === 'assistant' ? '★' : '·'}</span>
       <span style="min-width:0">
         <b style="display:block;font-size:13.5px">${esc(t.title || t.id)}</b>
         <span style="display:block;font-size:11.5px;color:var(--ink-3);margin-top:3px;line-height:1.5">
@@ -2790,9 +2803,9 @@ async function openThreadList() {
       + byCourse[cid].map(row).join('');
   }).join('');
   const inner = `
-    <div class="groupRow brain"><span class="gGlyph">${ICONS.compass}</span><span>总大脑（A 级）</span>
-      <span class="tail">${(brain && brain.asked) || 0} 问</span></div>
-    ${row(brain || { id: 'brain', title: '总大脑 · 规划与建议', sub: '方向 · 长期建议' })}
+    <div class="groupRow brain"><span class="gGlyph">${ICONS.doc}</span><span>B · 助教</span>
+      <span class="tail">${(assist && assist.asked) || 0} 问</span></div>
+    ${row(assist || { id: 'assistant', title: 'B · 助教', sub: '学习辅导 · 步步引导 · 巩固提升' })}
     <div class="st" style="padding:16px 0 4px;font-size:12px;color:var(--ink-4)">按课程</div>
     ${groups || '<div class="empty">还没有对话。在阅读器里点鲸鱼问一句，就会按课程生成一条。</div>'}`;
   const sh = sheet('会话', inner);
@@ -2800,7 +2813,7 @@ async function openThreadList() {
     sh.close();
     const id = n.dataset.thread;
     setTimeout(() => {
-      if (id === 'brain') openAI(null, 0, 'brain');
+      if (id === 'assistant') openAI(null, 0, 'assistant');
       else if (id.startsWith('doc-')) openAI(id.slice(4), 0, 'chat');
       else openAI(null, 0, 'chat');
     }, 260);
@@ -2880,8 +2893,7 @@ function pushMsg(msg) {
 }
 /** 连后端时的发送：SSE 流式读回来，边收边渲染 */
 async function aiSendRemote(text) {
-  const kind = aiCtx.kind || 'chat';                 // brain(A) / assistant(B) / chat(C)
-  const isBrain = kind === 'brain';
+  const kind = aiCtx.kind || 'chat';                 // assistant(B 助教) / chat(C 问答)
   /* ---- 手机 App 直连 DeepSeek：不经过电脑 ---- */
   if (IS_APP && aiMode() === 'direct') {
     const st = settings();
@@ -2899,7 +2911,7 @@ async function aiSendRemote(text) {
     aiBusy = true; aiPaint();
     const sys = systemPrompt(kind);   //"先想再答"那类说明
     const ctx = [
-      kind === 'brain' ? '【他的整体数据】\n' + JSON.stringify(stateSnapshotForBrain(), null, 1) : '',
+      kind === 'assistant' ? '【他的整体数据】\n' + JSON.stringify(stateSnapshotForBrain(), null, 1) : '',
       sec0 ? `【正在看的这一节】${sec0.title}\n${String(sec0.text || '').slice(0, 2200)}` : '',
       aiAttach && !sec0 ? localHitsText(text) : '',
     ].filter(Boolean).join('\n\n');
@@ -2926,11 +2938,11 @@ async function aiSendRemote(text) {
     aiPaint();
     return;
   }
-  const threadId = aiCtx.threadId || (isBrain ? 'brain' : kind === 'assistant' ? 'assistant' : (aiCtx.docId ? `doc-${aiCtx.docId}` : 'global'));
+  const threadId = aiCtx.threadId || (kind === 'assistant' ? 'assistant' : (aiCtx.docId ? `doc-${aiCtx.docId}` : 'global'));
   const doc = aiCtx.docId ? DOCS[aiCtx.docId] : null;
   const sec = doc ? doc.sections[aiCtx.idx] : null;
-  const title = isBrain ? '总大脑' : kind === 'assistant' ? '助教 · 每日复盘' : (doc ? doc.title : '随手问');
-  const sub = isBrain ? '规划 · 建议 · 总导师' : kind === 'assistant' ? '每日复盘 · 注意事项 · 细节反馈' : (sec ? (sec.tab || sec.title) : '全部资料');
+  const title = doc ? doc.title : levelName(kind);
+  const sub = kind === 'assistant' ? levelSub('assistant') : (sec ? (sec.tab || sec.title) : '全部资料');
   aiCtx.threadId = threadId;
   aiCtx.kind = kind;
   aiCtx.threadTitle = title;
@@ -3003,8 +3015,7 @@ document.addEventListener('click', (e) => {
 
   switch (act) {
     case 'go': go(v); break;
-    case 'aiTab': openAI(null, 0, 'brain'); break;
-    case 'brain': openAI(null, 0, 'brain'); break;      // 首页「学习总览」→ A 级
+    case 'aiTab': openAI(null, 0, 'assistant'); break;   // 底部导航的鲸鱼：默认进 B 助教
     case 'overview': go('#/overview'); break;
     case 'roadFull': {
       roadFull = !roadFull;
@@ -3109,7 +3120,7 @@ document.addEventListener('click', (e) => {
       const listHTML = (arr) => arr.map((m) => `<div class="item" data-m="${esc(m)}">
           <span class="idx">${cfg.model === m ? '✓' : ''}</span><span>${esc(m)}</span></div>`).join('')
         + `<div class="empty" style="text-align:left;padding:12px 0 0">列表来自 DeepSeek 的 /models 接口；打开「设置 → 刷新模型列表」可以重新拉一次。</div>`;
-      const sh = sheet('选择模型（' + (aiCtx.kind === 'brain' ? 'A 总导师' : aiCtx.kind === 'assistant' ? 'B 助教' : 'C 问答') + '）', `<div id="modelSheetList">${listHTML(list)}</div>`);
+      const sh = sheet('选择模型（' + levelName(aiCtx.kind) + '）', `<div id="modelSheetList">${listHTML(list)}</div>`);
       sh.wrap.addEventListener('click', (ev) => {
         const n = ev.target.closest('[data-m]');
         if (!n) return;
@@ -3124,7 +3135,7 @@ document.addEventListener('click', (e) => {
       const inner = EFFORTS.map(([v, t]) => `<div class="item" data-e="${v}">
           <span class="idx">${cfg.effort === v ? '✓' : ''}</span><span>${t}</span></div>`).join('')
         + `<div class="empty" style="text-align:left;padding:12px 0 0">自动 = 不加任何要求，让模型自己决定；低 / 中 / 高会作为 reasoning_effort 参数发给接口（模型不支持时自动忽略重试）。</div>`;
-      const sh = sheet('推理强度 —— ' + (aiCtx.kind === 'brain' ? 'A 总导师' : aiCtx.kind === 'assistant' ? 'B 助教' : 'C 问答'), inner);
+      const sh = sheet('推理强度 —— ' + levelName(aiCtx.kind), inner);
       $$('[data-e]', sh.wrap).forEach((n) => n.addEventListener('click', () => {
         levelCfg(aiCtx.kind).effort = n.dataset.e;
         saveState(); sh.close(); aiPaint(); toast('推理强度：' + effortLabel(n.dataset.e));
@@ -3174,11 +3185,6 @@ document.addEventListener('click', (e) => {
       break;
     }
     case 'aiDeepSeek': aiDeepSeek(); break;
-    case 'aiPlanApply': {
-      const m = currentMsgs()[Number(v)];
-      if (m && m.plan) applyPlan(m.plan); else toast('这份排期没解析出来');
-      break;
-    }
     case 'aiThreads': openThreadList(); break;
     case 'drawer': openDrawer(); break;
     case 'chatBack': {
@@ -3197,8 +3203,7 @@ document.addEventListener('click', (e) => {
     case 'openThread': {
       const id = v;
       closeDrawer();
-      if (id === 'brain') setLevel('brain');
-      else if (id === 'assistant') setLevel('assistant');
+      if (id === 'assistant') setLevel('assistant');
       else if (id.startsWith('doc-')) { aiCtx = { docId: id.slice(4), idx: 0, kind: 'chat', threadId: id }; remoteMsgs = []; aiCtx.loadedThread = null; $('#dwBody').innerHTML = drawerHTML(); setLevelRefresh(); }
       else { aiCtx = { docId: null, idx: 0, kind: 'chat', threadId: id }; remoteMsgs = []; aiCtx.loadedThread = null; setLevelRefresh(); }
       break;
@@ -3237,7 +3242,7 @@ document.addEventListener('click', (e) => {
       const id = v;
       closeAI();
       setTimeout(() => {
-        if (id === 'brain') openAI(null, 0, 'brain');
+        if (id === 'assistant') openAI(null, 0, 'assistant');
         else if (id.startsWith('doc-')) openAI(id.slice(4), 0, 'chat');
         else openAI(null, 0, 'chat');
       }, 60);
