@@ -1,8 +1,8 @@
 {
-    "version":  "1.1.0",
-    "notes":  "原生版：界面与原版 1:1（去掉手机样机外壳），总进度按课程统计修正，学习路线默认展开；配置备份到「文档/学习App」",
-    "apk":  "https://19836029013.github.io/study-app-releases/study-app-1.1.0.apk",
-    "size":  180646,
-    "sha256":  "e76924c5e2a0aff156716ac13cd604e786316b25bd90710fb04bdfcb0f509432",
+    "version":  "1.1.1",
+    "notes":  "修复\"已是最新却还能下载更新\"：没有新版本时隐藏「下载并安装」按钮（和原版一致），并在下载动作上加了守卫",
+    "apk":  "https://19836029013.github.io/study-app-releases/study-app-1.1.1.apk",
+    "size":  180774,
+    "sha256":  "2075dc2769044a8e49083713276fd66fa34b993e727296459518f559480e44f7",
     "date":  "2026-09-17"
 }
