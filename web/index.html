@@ -1993,7 +1993,6 @@ function drawerHTML() {
     <div class="dwGrp">最近</div>
     <div id="dwRecent"></div>
     <div class="dwGrp">更多</div>
-    ${row('aiKey', '', ICONS.check, '连接 / 换模型', backend.hasKey ? '已连接' : '未配置')}
     ${row('drawerSettings', '', ICONS.more, '设置', '')}`;
 }
 async function fillDrawer() {
@@ -2076,7 +2075,7 @@ function openModelSheet() {
   }));
 }
 /* ---------- 导出（Markdown 下载 / 打印成 PDF） ---------- */
-/* ---------- 设置：版本 / 检查更新 / 立即更新 / 强制刷新界面 ---------- */
+/* ---------- 设置：DeepSeek 接口 / 检查更新 / 配置备份（模拟手机 App 的设置页） ---------- */
 /* ---------- 手机 App 直连模式要用的几个小工具 ---------- */
 const DEFAULT_PROMPTS_CLIENT = {
   brain: '你是这个学习 App 的「总导师」，只负责规划、建议、综合引导，不做日常答疑。中文，直接给判断和下一步，最后附 ```plan JSON 代码块（headline/focus/tasks/warn）。',
@@ -2097,167 +2096,128 @@ function localHitsText(text) {
 }
 async function openSettingsSheet() {
   const st = settings();
-  const aiBlock = `
-    <div class="sect" style="padding:0 0 6px">
-      <div class="h">DeepSeek API Key</div>
-      <input id="setKey" type="password" placeholder="粘贴 API Key（sk-…）" value="${esc(st.apiKey || '')}"
-        style="width:100%;border:1px solid var(--line-2);border-radius:12px;padding:11px;font:inherit;font-size:13px;background:var(--bg-soft);outline:none;margin-top:6px">
-      <button class="btn" id="setSaveKey" style="margin-top:10px">保存 Key</button>
-    </div>`;
+  const APP_V = '1.1.1';        // 原型模拟的就是手机里那个 App 的版本（发新版时改这一行）
+  const UP_URL = 'https://19836029013.github.io/study-app-releases/version.json';
   const sh = sheet('设置', `
-    ${aiBlock}
-    <div class="sect" style="padding:6px 0 0">
-      <div class="h">每级用哪个模型 / 思考到几档</div>
-      ${['assistant', 'chat'].map((k) => {
-        const c = levelCfg(k);
-        const name = levelName(k);
-        return `<div style="margin:10px 0 12px">
-          <div style="font-size:12.5px;font-weight:700;margin-bottom:6px">${name}</div>
-          <select data-lv-model="${k}" style="width:100%;border:1px solid var(--line-2);border-radius:12px;padding:10px;font:inherit;font-size:12.5px;background:var(--bg-soft)">
-            ${modelOptions().map((m) => `<option value="${m}"${c.model === m ? ' selected' : ''}>${m}</option>`).join('')}
-          </select>
-          <select data-lv-effort="${k}" style="width:100%;border:1px solid var(--line-2);border-radius:12px;padding:10px;font:inherit;font-size:12.5px;background:var(--bg-soft);margin-top:6px">
-            ${EFFORTS.map(([v, t]) => `<option value="${v}"${(c.effort || 'auto') === v ? ' selected' : ''}>推理强度：${t}</option>`).join('')}
-          </select>
-        </div>`;
-      }).join('')}
-      <button class="btn" id="setSaveLevels">保存这两组设置</button>
-      <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
-        <button class="btn ghost" id="setReloadModels" style="margin-top:0">刷新模型列表</button>
-        <span id="setModelFrom" style="font-size:11px;color:var(--ink-4);line-height:1.5"></span>
+    <div class="sect" style="padding:0 0 6px">
+      <div class="h">DeepSeek 接口<span class="cnt" style="margin-left:auto">${st.apiKey ? '已配置' : '还没填'}</span></div>
+      <input id="setKey" type="password" placeholder="API Key（sk-…）" value="${esc(st.apiKey || '')}"
+        style="width:100%;border:1px solid var(--line-2);border-radius:12px;padding:11px;font:inherit;font-size:13px;background:var(--bg-soft);outline:none;margin-top:6px">
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="btn" id="setSaveKey" style="margin-top:0;flex:1">保存</button>
+        <button class="btn ghost" id="setTest" style="margin-top:0;flex:1">测试连接</button>
+      </div>
+      <div style="font-size:11.5px;color:var(--ink-4);line-height:1.65;margin-top:10px">Key 只存在本机，只用来直连 DeepSeek。</div>
+    </div>
+    <div class="sect" style="padding:16px 0 0">
+      <div class="h">检查更新<span class="cnt" id="setVer" style="margin-left:auto">当前版本 v${APP_V}</span></div>
+      <div id="setUpd" style="font-size:12.5px;color:var(--ink-2);line-height:1.65">点「检查更新」看看发布仓库里有没有新版本。</div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn ghost" id="setCheck" style="margin-top:0;flex:1">检查更新</button>
+        <button class="btn" id="setApply" style="margin-top:0;flex:1;display:none">下载并安装</button>
       </div>
     </div>
-    <div class="sect" style="padding:6px 0 0">
-      <div class="h">版本与更新</div>
-    </div>
-    <div class="setRow"><span>版本</span><b id="setVer">读取中…</b></div>
-    <div class="setRow"><span>更新</span><b id="setUpd">点下面按钮检查</b></div>
-    <button class="btn" id="setCheck">检查更新</button>
-    <button class="btn ghost" id="setApply" style="display:none">立即更新到最新版</button>
-    <button class="btn ghost" id="setReload">强制刷新界面（清缓存）</button>
     <div class="sect" style="padding:16px 0 0">
-      <div class="h">东西都存在哪</div>
-      <div class="advItem"><span class="tag">对话</span><span>server 目录同级的 data\\store.json（进度、任务、所有对话、摘要）</span></div>
-      <div class="advItem" style="margin-top:7px"><span class="tag">Key</span><span>server\\config.json —— 只在你本机，不会进仓库、不会上传</span></div>
-      <div class="advItem" style="margin-top:7px"><span class="tag">人设</span><span>server\\prompts.json —— 改完存盘立刻生效</span></div>
+      <div class="h">配置备份</div>
+      <div style="font-size:12.5px;color:var(--ink-2);line-height:1.7">进度、任务、对话都只存在本机；每次改动自动存一份，重装后自动恢复。</div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn ghost" id="setBackup" style="margin-top:0;flex:1">立即备份</button>
+        <button class="btn ghost" id="setRestore" style="margin-top:0;flex:1">从备份恢复</button>
+      </div>
     </div>`);
-  sh.wrap.querySelector('.sheet').style.height = '86%';       // 铺开但上方留出一点，看得见是从哪弹出来的
-  sh.wrap.querySelector('.sheet').style.maxHeight = '86%';
+  /* 设置整屏（上方留一点，看得出是从哪弹出来的）；滚动交给面板自己，不要锁整页 */
+  sh.wrap.querySelector('.sheet').style.height = '96%';
+  sh.wrap.querySelector('.sheet').style.maxHeight = '96%';
   sh.wrap.querySelector('.sheet').style.borderRadius = '22px 22px 0 0';
   const $v = (s) => $(s, sh.wrap);
-  try {
-    const v = (IS_APP && NATIVE.info) ? JSON.parse(NATIVE.info()) : await (await fetch('/api/version', { cache: 'no-store' })).json();
-    $v('#setVer').textContent = IS_APP
-      ? `手机版 v${v.version}`                                   // 手机 App 里只显示真实版本号，不要那句"非 git 安装"
-      : `v${v.version} · ${v.commit || '本机运行'}${v.buildTime ? ' · ' + v.buildTime.slice(0, 10) : ''}`;
-    if (v.remote) $v('#setVer').title = v.remote;
-  } catch (e) { $v('#setVer').textContent = '读不到（后端没在跑？）'; }
   const applyBtn = $v('#setApply');
-  /* AI 模式切换 + 保存 */
-  $$('[data-ai]', sh.wrap).forEach((n) => n.addEventListener('click', () => {
-    settings().aiMode = n.dataset.ai;
-    state.seeded = true; saveState(); sh.close();
-    setTimeout(openSettingsSheet, 260);
-  }));
-  const saveKey = $v('#setSaveKey');
-  if (saveKey) saveKey.addEventListener('click', () => {
+
+  /* ---------- DeepSeek 接口：保存 / 测试连接 ---------- */
+  $v('#setSaveKey').addEventListener('click', () => {
     settings().apiKey = $v('#setKey').value.trim();
-    saveState(); sh.close();
+    saveState();
     toast(settings().apiKey ? '已保存，现在可以直接问 DeepSeek 了' : 'Key 是空的');
   });
-  $v('#setSaveLevels').addEventListener('click', () => {
-    ['assistant', 'chat'].forEach((k) => {
-      const m = $v(`[data-lv-model="${k}"]`), e = $v(`[data-lv-effort="${k}"]`);
-      if (m) settings().levels[k] = { model: m.value, effort: e ? e.value : 'auto' };
-    });
+  $v('#setTest').addEventListener('click', async () => {
+    const key = $v('#setKey').value.trim();
+    settings().apiKey = key;
     saveState();
-    toast('模型与思考等级已保存');
-  });
-  /* 打开设置就去问一次 API：到底有哪些模型可选 */
-  const fillModels = async (fromApi) => {
-    const r = await fetchModels();
-    const note = $v('#setModelFrom');
-    if (note) note.textContent = r.ok
-      ? `模型列表来自 DeepSeek 接口（${r.models.length} 个）`
-      : `取不到列表（${r.reason}），先用内置的两个`;
-    $$('[data-lv-model]', sh.wrap).forEach((sel) => {
-      const cur = sel.value;
-      sel.innerHTML = r.models.map((m) => `<option value="${m}"${cur === m ? ' selected' : ''}>${m}</option>`).join('');
-    });
-  };
-  fillModels();
-  $v('#setReloadModels').addEventListener('click', () => { toast('重新读模型列表…'); fillModels(); });
-  /* 改一下就存一下：不用再点"保存这三组设置"，也不会因为忘了点而丢配置 */
-  ['assistant', 'chat'].forEach((k) => {
-    [['model', `[data-lv-model="${k}"]`], ['effort', `[data-lv-effort="${k}"]`]].forEach(([key, sel]) => {
-      const el = $v(sel);
-      if (el) el.addEventListener('change', () => {
-        settings().levels[k] = Object.assign({}, levelCfg(k), { [key]: el.value });
-        saveState();
-        toast(`${levelName(k)} 的${key === 'model' ? '模型' : '推理强度'}已保存`);
-        if ($('#chatBody')) aiPaint();
-      });
-    });
-  });
-  const saveBase = $v('#setSaveBase');
-  if (saveBase) saveBase.addEventListener('click', async () => {
-    settings().apiBase = $v('#setBase').value.trim().replace(/\/$/, '');
-    saveState(); sh.close();
-    await probeBackend();
-    toast(backend.online ? '连上了 ✓' : '还是连不上，检查电脑和 Tailscale');
-    aiPaint();
-  });
-  $v('#setCheck').addEventListener('click', async () => {
-    $v('#setUpd').textContent = '检查中…';
-    if (!IS_APP) {                       // 浏览器里没法自动装 APK，直接说清楚
-      $v('#setUpd').innerHTML = '浏览器里不能自动安装 App。<br><span style="font-size:11px;color:var(--ink-3)">请在手机 App 里点这个按钮；电脑上要更新就用 git pull。</span>';
-      return;
-    }
-    if (IS_APP && NATIVE.checkUpdate) {              // 手机 App：去发布仓库看有没有新版 APK
-      try {
-        const r = JSON.parse(NATIVE.checkUpdate() || '{}');
-        if (!r.ok) { $v('#setUpd').textContent = r.error || '检查失败'; return; }
-        if (r.hasNew) {
-          $v('#setUpd').innerHTML = `有新版 <b>${esc(r.version)}</b><br><span style="font-size:11px;color:var(--ink-3)">${esc(r.notes || '')}</span>`;
-          applyBtn.style.display = '';
-          applyBtn.dataset.url = r.url || '';
-          applyBtn.textContent = '下载并安装新版';
-        } else { $v('#setUpd').textContent = `已是最新（${esc(r.version)}）`; applyBtn.style.display = 'none'; }
-      } catch (e) { $v('#setUpd').textContent = '检查失败：' + e.message; }
-      return;
-    }
+    if (!key) { toast('先填 API Key'); return; }
+    toast('正在请求接口…');
     try {
-      const r = await (await fetch('/api/update/check', { cache: 'no-store' })).json();
-      if (!r.ok) { $v('#setUpd').textContent = r.reason || '检查失败'; return; }
-      if (!r.hasUpstream) { $v('#setUpd').textContent = '这个仓库还没配远程（origin），推上去之后就能检查'; return; }
-      if (r.behind > 0) {
-        $v('#setUpd').innerHTML = `有 <b>${r.behind}</b> 个更新<br><span style="font-size:11px;color:var(--ink-3)">最新：${esc(r.latest || '')}</span>`;
-        applyBtn.style.display = '';
-      } else {
-        $v('#setUpd').textContent = '已经是最新的 ✓';
-        applyBtn.style.display = 'none';
+      if (IS_APP && NATIVE.listModels) {           // 手机 App 里交给原生去问
+        const r = JSON.parse(NATIVE.listModels(JSON.stringify({
+          apiKey: key, baseUrl: settings().baseUrl || 'https://api.deepseek.com',
+        })) || '{}');
+        if (r.models && r.models.length) { modelCache = r.models; toast('连接成功，读到 ' + r.models.length + ' 个模型'); }
+        else toast('连接失败：' + (r.error || '没读到模型'));
+        return;
       }
-    } catch (e) { $v('#setUpd').textContent = '检查失败：' + e.message; }
+      const r = await fetch('https://api.deepseek.com/models', { headers: { Authorization: 'Bearer ' + key } });
+      if (!r.ok) { toast('连接失败：HTTP ' + r.status); return; }
+      const models = ((await r.json()).data || []).map((m) => m.id);
+      modelCache = models;
+      toast('连接成功，读到 ' + models.length + ' 个模型');
+    } catch (e) { toast('连接失败：' + e.message); }
   });
-  applyBtn.addEventListener('click', async () => {
-    if (IS_APP && NATIVE.installUpdate) {
-      applyBtn.textContent = '下载中…';
-      try {
-        const r = JSON.parse(NATIVE.installUpdate(applyBtn.dataset.url || '') || '{}');
-        toast(r.ok ? '已调起浏览器下载，下完点那个 APK 安装' : (r.error || '下载失败'));
-      } catch (e) { toast('下载失败：' + e.message); }
-      applyBtn.textContent = '下载并安装新版';
-      return;
+
+  /* ---------- 检查更新：问的就是 App 用的那份清单，只是这里不真装 ---------- */
+  const cmpVer = (a, b) => {
+    const pa = String(a || '').split('.').map(Number);
+    const pb = String(b || '').split('.').map(Number);
+    for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+      const d = (pa[i] || 0) - (pb[i] || 0);
+      if (d) return d > 0 ? 1 : -1;
     }
-    applyBtn.textContent = '更新中…';
+    return 0;
+  };
+  $v('#setCheck').addEventListener('click', async () => {
+    const status = $v('#setUpd');
+    status.textContent = '正在问更新源…';
+    applyBtn.style.display = 'none';
     try {
-      const r = await (await fetch('/api/update/apply', { method: 'POST' })).json();
-      if (!r.ok) { toast(r.reason || '更新失败'); applyBtn.textContent = '立即更新到最新版'; return; }
-      toast(r.changed ? `已更新 ${r.before} → ${r.after}，正在刷新` : '已是最新，不用更新');
-      hardReload();
-    } catch (e) { toast('更新失败：' + e.message); applyBtn.textContent = '立即更新到最新版'; }
+      const r = await (await fetch(UP_URL + '?t=' + Date.now(), { cache: 'no-store' })).json();
+      const hasNew = cmpVer(r.version, APP_V) > 0;
+      status.innerHTML = '最新版本：<b>' + esc(r.version) + '</b>'
+        + (hasNew ? '（有新版本）' : '（已是最新）')
+        + (r.notes ? '<br><span style="font-size:11.5px;color:var(--ink-4)">更新说明：' + esc(r.notes) + '</span>' : '');
+      if (hasNew) { applyBtn.style.display = ''; applyBtn.dataset.url = r.apk || ''; }
+    } catch (e) { status.textContent = '检查失败：' + e.message; }
   });
-  $v('#setReload').addEventListener('click', hardReload);
+  applyBtn.addEventListener('click', () => {
+    const url = applyBtn.dataset.url || '';
+    if (!url) { toast('清单里没有下载地址'); return; }
+    toast('正在下载 APK，下完点安装就行');
+    window.open(url, '_blank');
+  });
+
+  /* ---------- 配置备份：导出 / 导入一份 JSON ---------- */
+  $v('#setBackup').addEventListener('click', () => {
+    downloadText('学习App配置备份.json', JSON.stringify(state, null, 2));
+    toast('已导出备份');
+  });
+  $v('#setRestore').addEventListener('click', () => {
+    const pick = document.createElement('input');
+    pick.type = 'file';
+    pick.accept = '.json,application/json';
+    pick.onchange = () => {
+      const f = pick.files && pick.files[0];
+      if (!f) return;
+      const fr = new FileReader();
+      fr.onload = () => {
+        try {
+          const obj = JSON.parse(String(fr.result));
+          if (!obj || typeof obj !== 'object') throw new Error('这不是备份文件');
+          Object.assign(state, obj);
+          saveState();
+          sh.close();
+          toast('已从备份恢复');
+        } catch (e) { toast('恢复失败：' + e.message); }
+      };
+      fr.readAsText(f);
+    };
+    pick.click();
+  });
 }
 /** 清掉 Service Worker 缓存再重载（PWA 换了新版本时用） */
 async function hardReload() {
@@ -3119,7 +3079,7 @@ document.addEventListener('click', (e) => {
       fetchModels().then((r) => { if (r.ok) { const sel = $('#modelSheetList'); if (sel) sel.innerHTML = listHTML(r.models); } });
       const listHTML = (arr) => arr.map((m) => `<div class="item" data-m="${esc(m)}">
           <span class="idx">${cfg.model === m ? '✓' : ''}</span><span>${esc(m)}</span></div>`).join('')
-        + `<div class="empty" style="text-align:left;padding:12px 0 0">列表来自 DeepSeek 的 /models 接口；打开「设置 → 刷新模型列表」可以重新拉一次。</div>`;
+;
       const sh = sheet('选择模型（' + levelName(aiCtx.kind) + '）', `<div id="modelSheetList">${listHTML(list)}</div>`);
       sh.wrap.addEventListener('click', (ev) => {
         const n = ev.target.closest('[data-m]');
@@ -3134,7 +3094,7 @@ document.addEventListener('click', (e) => {
       const cfg = levelCfg(aiCtx.kind);
       const inner = EFFORTS.map(([v, t]) => `<div class="item" data-e="${v}">
           <span class="idx">${cfg.effort === v ? '✓' : ''}</span><span>${t}</span></div>`).join('')
-        + `<div class="empty" style="text-align:left;padding:12px 0 0">自动 = 不加任何要求，让模型自己决定；低 / 中 / 高会作为 reasoning_effort 参数发给接口（模型不支持时自动忽略重试）。</div>`;
+;
       const sh = sheet('推理强度 —— ' + levelName(aiCtx.kind), inner);
       $$('[data-e]', sh.wrap).forEach((n) => n.addEventListener('click', () => {
         levelCfg(aiCtx.kind).effort = n.dataset.e;
@@ -3640,32 +3600,6 @@ if (location.protocol.startsWith('http') && 'serviceWorker' in navigator) {
   window.addEventListener('orientationchange', fitPhone);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fitPhone);
   fitPhone();
-})();
-</script><script>
-/* 设置页精简补丁 2026-09-17：删抽屉换模型行、删两处解释、删设置里三块、设置整屏不锁滚动 */
-(function () {
-  var TXT = ['每级用哪个模型', '版本与更新', '东西都存在哪', '列表来自 DeepSeek 的 /models 接口', '自动 = 不加任何要求'];
-  var IDS = ['setReloadModels', 'setReload', 'setApply', 'setCheck', 'setVer', 'setUpd', 'setModelFrom'];
-  function clean() {
-    document.querySelectorAll('.dwRow[data-act="aiKey"]').forEach(function (n) { n.remove(); });
-    IDS.forEach(function (id) { var e = document.getElementById(id); if (e) { (e.closest('.sect') || e).remove(); } });
-    document.querySelectorAll('.sheet .sb > *').forEach(function (n) {
-      var t = (n.textContent || '').trim();
-      for (var i = 0; i < TXT.length; i++) { if (t.indexOf(TXT[i]) >= 0) { n.remove(); break; } }
-    });
-    document.querySelectorAll('.sheet.on').forEach(function (sh) {
-      var st = (sh.querySelector('.st') || {}).textContent || '';
-      if (st.indexOf('设置') >= 0) { sh.style.height = '96%'; sh.style.maxHeight = '96%'; }
-    });
-    // 值已被删空的"版本""更新"这种行也一起清掉
-    document.querySelectorAll('.setRow').forEach(function (r) {
-      var b = r.querySelector('b');
-      if (!b || !(b.textContent || '').trim()) { r.remove(); }
-    });
-    document.body.style.overflow = '';
-  }
-  new MutationObserver(clean).observe(document.body, { childList: true, subtree: true });
-  clean();
 })();
 </script></body>
 </html>
